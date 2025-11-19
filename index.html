@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pascal IT Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <meta name="description" content="Pascal IT Portfolio – Web developer, software enthusiast, and tech innovator">
+  <meta name="keywords" content="IT Portfolio, Web Developer, Projects, Skills, Pascal">
+
+  <div class="profile-top">
+    <img src="./proj images/pascalProfile.jpg" alt="Pascal Profile">
+  </div>
+  
+</head>
+<body class="home dark">
+
+<!-- Page Transition Overlay -->
+<div id="page-transition"></div>
+
+<!-- Header -->
+<header>
+  <div class="container header-container">
+    <div class="logo">Pascal<span class="highlight">IT</span></div>
+    <nav>
+      <ul id="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="join.html">Join Me</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger">
+        <div></div><div></div><div></div>
+      </div>
+    </nav>
+    <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container hero-content">
+    <div class="hero-text">
+      <h1>Hello, I'm <span class="highlight">Pascal</span></h1>
+      <h2 class="typing"></h2>
+      <p>Aspiring IT professional passionate about web development, software, and technology solutions.</p>
+      <a href="contact.html" class="btn">Hire Me</a>
+    </div>
+  
+  </div>
+</section>
+
+<!-- Skills Section (Circular) -->
+<section class="skills-section">
+  <div class="container">
+    <h2>My Skills</h2>
+    <div class="circular-skills">
+      <div class="skill" data-skill="HTML" data-percent="95"></div>
+      <div class="skill" data-skill="JavaScript" data-percent="90"></div>
+      <div class="skill" data-skill="Java" data-percent="85"></div>
+      <div class="skill" data-skill="React" data-percent="80"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Back to top -->
+<button id="topBtn"><i class="fas fa-chevron-up"></i></button>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2025 Pascal IT Major. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>

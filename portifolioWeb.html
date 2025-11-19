@@ -1,0 +1,759 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pascal — IT Portfolio</title>
+  <meta name="description" content="Pascal — IT student. Developer, problem solver, and lifelong learner. Portfolio with projects, resume, contact and join forms, skills, and animations." />
+  <style>
+    /* ============================
+       Variables & Base
+       ============================ */
+    :root{
+      --bg:#0b0f16;            /* dark slate */
+      --card:#0f1720;          /* slightly lighter */
+      --muted:#98a0a8;
+      --accent:#00e0ff;        /* cyan tech */
+      --accent-2:#ffd74d;      /* gold highlight */
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.02);
+      --radius:14px;
+      --maxw:1100px;
+      --mono: "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
+      --transition: 300ms cubic-bezier(.2,.9,.3,1);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:linear-gradient(180deg,var(--bg),#071018 110%);
+      color:#e6eef6;
+      font-family:var(--mono);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      scroll-behavior:smooth;
+      line-height:1.45;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* ============================
+       Layout
+       ============================ */
+    .wrapper{max-width:var(--maxw);margin:36px auto;padding:20px;}
+    header{
+      position:sticky;top:14px;z-index:60;
+      background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;
+      padding:10px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+    }
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+    }
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo {
+      width:48px;height:48px;border-radius:10px;background:
+      linear-gradient(135deg,var(--accent),#006b9a);
+      display:grid;place-items:center;font-weight:800;color:#021018;
+      box-shadow: 0 6px 18px rgba(0,224,255,0.08), inset 0 -4px 10px rgba(0,0,0,0.2);
+    }
+    .brand h1{font-size:1.05rem;margin:0}
+    .brand p{margin:0;font-size:0.8rem;color:var(--muted)}
+    nav ul{display:flex;gap:12px;list-style:none;margin:0;padding:0;align-items:center}
+    nav a.btn-link{
+      padding:8px 12px;border-radius:10px;color:var(--muted);font-weight:600;font-size:0.9rem;
+      transition:var(--transition);
+    }
+    nav a.btn-link:hover{color:var(--accent);transform:translateY(-3px)}
+    .controls{display:flex;gap:10px;align-items:center}
+
+    /* Toggle */
+    .toggle{
+      width:52px;height:32px;background:var(--glass);border-radius:999px;display:inline-flex;padding:4px;
+      align-items:center;cursor:pointer;border:1px solid rgba(255,255,255,0.03);
+    }
+    .toggle .knob{width:24px;height:24px;border-radius:999px;background:linear-gradient(180deg,#fff,#e0f7ff);transform:translateX(0);transition:var(--transition)}
+    .toggle[data-mode="dark"] .knob{transform:translateX(20px);}
+
+    /* ============================
+       Hero
+       ============================ */
+    .hero{
+      display:grid;grid-template-columns: 1fr 420px;gap:28px;align-items:center;margin-top:24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius); padding:36px; box-shadow: 0 18px 50px rgba(2,6,12,0.7);
+    }
+
+    .hero-left h2{font-size:1rem;color:var(--muted);margin:0 0 6px}
+    .hero-left h1{font-size:2.15rem;margin:0;letter-spacing:-0.6px}
+    .lead{color: #d7e9f2;margin-top:12px;max-width:65ch}
+    .hero-ctas{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
+    .primary{
+      background:linear-gradient(90deg,var(--accent),#0086b8);
+      padding:10px 16px;border-radius:12px;color:#021018;font-weight:800;
+      box-shadow: 0 10px 30px rgba(0,224,255,0.08);
+      transition:transform 220ms;
+    }
+    .primary:hover{transform:translateY(-4px)}
+    .secondary{
+      background:transparent;border:1px solid rgba(255,255,255,0.04);padding:10px 14px;border-radius:12px;color:var(--muted);
+    }
+
+    /* Profile Card */
+    .profile{
+      background: linear-gradient(180deg,var(--card), rgba(255,255,255,0.02));
+      border-radius:12px;padding:18px;display:flex;gap:12px;align-items:center;
+      box-shadow: 0 8px 30px rgba(2,8,20,0.6);
+    }
+    .avatar{
+      width:84px;height:84px;border-radius:12px;overflow:hidden;flex:0 0 84px;border:2px solid rgba(255,255,255,0.03);
+    }
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    .pinfo h3{margin:0;font-size:1.05rem}
+    .pinfo p{margin:6px 0 0;font-size:0.85rem;color:var(--muted)}
+
+    .socials{display:flex;gap:8px;margin-top:10px}
+    .icon-btn{
+      display:inline-grid;place-items:center;width:40px;height:40px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.02);
+      transition: all 210ms ease;cursor:pointer;
+    }
+    .icon-btn svg{width:18px;height:18px;opacity:0.95}
+    .icon-btn:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,0.6);filter:brightness(1.05)}
+
+    /* ============================
+       Sections & Cards
+       ============================ */
+    section{margin-top:28px}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:12px}
+    .section-head h3{margin:0}
+    .card-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px;
+    }
+    .card{
+      background: linear-gradient(180deg,var(--glass),var(--glass-2));
+      border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,0.02);
+      transition: transform 300ms, box-shadow 300ms;overflow:hidden;
+    }
+    .card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(2,8,20,0.6)}
+
+    /* Projects */
+    .projects-controls{display:flex;gap:8px;flex-wrap:wrap}
+    .chip{padding:8px 12px;border-radius:999px;background:transparent;border:1px solid rgba(255,255,255,0.03);cursor:pointer;font-weight:700;color:var(--muted)}
+    .chip.active{background:rgba(0,224,255,0.06);border-color:rgba(0,224,255,0.14);color:var(--accent)}
+
+    .project-card{
+      display:flex;flex-direction:column;gap:12px;padding:14px;border-radius:12px;background:linear-gradient(180deg,#07111a, #0b1620);
+      min-height:160px;
+    }
+    .project-card h4{margin:0}
+    .project-meta{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:0.85rem}
+    .project-actions{display:flex;gap:8px;margin-top:auto}
+    .ghost{padding:8px 10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted);cursor:pointer}
+
+    /* Skills */
+    .skill-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+    .skill-name{width:140px;color:var(--muted);font-size:0.9rem}
+    .skill-bar{flex:1;height:12px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden}
+    .skill-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),#00a3cc);border-radius:999px;transition:width 900ms cubic-bezier(.2,.9,.3,1)}
+
+    /* Testimonials */
+    .testi{display:flex;gap:12px;align-items:center}
+    .quote{font-style:italic;color:var(--muted)}
+
+    /* Forms */
+    form{display:flex;flex-direction:column;gap:10px}
+    input,textarea{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:10px;border-radius:8px;color:inherit}
+    textarea{min-height:110px;resize:vertical}
+    .form-row{display:flex;gap:10px}
+    .form-row input{flex:1}
+
+    /* Back to top */
+    .top-btn{
+      position:fixed;right:18px;bottom:18px;width:52px;height:52px;border-radius:12px;background:linear-gradient(180deg,var(--accent),#0086b8);
+      display:grid;place-items:center;color:#021018;font-weight:800;box-shadow:0 10px 30px rgba(0,224,255,0.08);cursor:pointer;transform:translateY(120%);transition:var(--transition);
+      z-index:80;
+    }
+    .top-btn.show{transform:translateY(0%)}
+
+    /* footer */
+    footer{margin-top:36px;text-align:center;color:var(--muted);font-size:0.9rem;padding:18px 6px}
+
+    /* responsive */
+    @media (max-width:1000px){
+      .hero{grid-template-columns:1fr;gap:18px}
+      .card-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:640px){
+      nav ul{display:none}
+      .profile{flex-direction:row;gap:10px}
+      .card-grid{grid-template-columns:1fr}
+      .hero-left h1{font-size:1.6rem}
+      .brand p{display:none}
+    }
+
+    /* animations (will be triggered by JS adding .in) */
+    .reveal{opacity:0;transform:translateY(18px);transition:var(--transition)}
+    .reveal.in{opacity:1;transform:translateY(0)}
+    .fade-in{opacity:0;transition:var(--transition)} .fade-in.in{opacity:1}
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Header / Nav -->
+    <header>
+      <div class="nav">
+        <div class="brand">
+          <div class="logo" aria-hidden>Pi</div>
+          <div>
+            <h1>Pascal <span style="color:var(--accent)">• IT</span></h1>
+            <p>Student • Developer • Problem Solver</p>
+          </div>
+        </div>
+
+        <nav aria-label="Main navigation">
+          <ul>
+            <li><a class="btn-link" href="#home">Home</a></li>
+            <li><a class="btn-link" href="#about">About</a></li>
+            <li><a class="btn-link" href="#projects">Projects</a></li>
+            <li><a class="btn-link" href="#skills">Skills</a></li>
+            <li><a class="btn-link" href="#join">Join Me</a></li>
+            <li><a class="btn-link" href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="controls">
+          <button id="downloadResume" title="Download resume" class="btn-link" style="background:transparent;border:none;padding:6px 10px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M12 3v12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 11l4 4 4-4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 21H3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div id="modeToggle" class="toggle" role="button" aria-pressed="false" aria-label="Toggle theme" data-mode="light" title="Toggle light/dark">
+            <div class="knob"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <main id="home" class="hero" aria-labelledby="heroTitle">
+      <div class="hero-left">
+        <h2 class="reveal">Hi, my name is</h2>
+        <h1 id="heroTitle" class="reveal">Pascal — <span style="color:var(--accent)">Software & Web Developer</span></h1>
+        <p class="lead reveal">I build reliable, maintainable, and beautiful web applications. I enjoy solving hard problems, learning new tech, and collaborating on projects that matter.</p>
+
+        <div class="hero-ctas reveal">
+          <a class="primary" href="#projects">View Projects</a>
+          <a class="secondary" href="#contact">Contact Me</a>
+          <a class="secondary" id="scrollCV" href="#about">Resume</a>
+        </div>
+
+        <div style="margin-top:18px" class="reveal">
+          <small style="color:var(--muted)">Location: Lusaka, Zambia • Open to internships & collaborations</small>
+        </div>
+      </div>
+
+      <aside>
+        <div class="profile reveal">
+          <div class="avatar" aria-hidden>
+            <!-- drop-in a real image by replacing src -->
+            <img src="./proj images/pascalProfile.jpg" alt="Pascal profile">
+          </div>
+          <div class="pinfo">
+            <h3>Pascal</h3>
+            <p>IT Student • Full-stack enthusiast • C++ • Python • JS</p>
+            <div class="socials" role="list">
+              <a class="icon-btn" href="#" title="LinkedIn" aria-label="LinkedIn">
+                <!-- LinkedIn SVG -->
+                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9H3v12h3V9zM4.5 6.75a1.75 1.75 0 1 1 0-3.5 1.75 1.75 0 0 1 0 3.5zM21 21h-3v-5.5c0-1.3-.5-2.2-1.8-2.2-1 0-1.6.7-1.9 1.4-.1.3-.1.8-.1 1.2V21h-3s.04-10.5 0-11.6h3V11c.4-.7 1.1-1.7 2.6-1.7 1.9 0 3.3 1.2 3.3 3.9V21z" fill="currentColor"/></svg>
+              </a>
+              <a class="icon-btn" href="#" title="GitHub" aria-label="GitHub">
+                <!-- GitHub -->
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 2a10 10 0 0 0-3.1 19.5c.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 .1 1.7.7 2.1 1 .7-1 1.8-1.1 2.6-.9.1-.7.4-1.1.7-1.3-2.2-.2-4.5-1.1-4.5-5a3.9 3.9 0 0 1 1-2.7 3.6 3.6 0 0 1 .1-2.7s.9-.3 2.9 1a9.9 9.9 0 0 1 5.2 0C18.2 5.2 19 5.5 19 5.5a3.6 3.6 0 0 1 .1 2.7 3.9 3.9 0 0 1 1 2.7c0 3.9-2.3 4.7-4.5 5 .4.3.7 1 .7 2v3c0 .3.2.6.7.5A10 10 0 0 0 12 2z" fill="currentColor"/></svg>
+              </a>
+              <a class="icon-btn" href="#" title="Twitter" aria-label="Twitter">
+                <!-- Twitter -->
+                <svg viewBox="0 0 24 24" fill="none"><path d="M22 5.9c-.6.25-1.26.42-1.95.5.7-.42 1.24-1.08 1.5-1.87-.66.4-1.4.7-2.18.85C18.2 4.6 17.3 4 16.25 4c-1.46 0-2.6 1.2-2.6 2.7 0 .2 0 .4.06.6C10.2 7.2 7.1 5.6 5 3.1c-.24.4-.36.86-.36 1.36 0 .94.47 1.78 1.2 2.27-.53-.02-1.03-.16-1.46-.4v.04c0 1.32.95 2.42 2.2 2.67-.46.12-.94.14-1.42.05.4 1.2 1.5 2.07 2.8 2.1C7.7 14.2 6 14.6 4.2 14.6c-.36 0-.7-.02-1.04-.06C5 15.6 6.7 16.3 8.5 16.3c5.83 0 9.02-4.83 9.02-9.02v-.4c.62-.44 1.12-1 1.52-1.62-.56.24-1.16.4-1.77.46z" fill="currentColor"/></svg>
+              </a>
+              <a class="icon-btn" href="stevenpascal371@gmail.com.com" title="Email" aria-label="Email">
+                <!-- Email -->
+                <svg viewBox="0 0 24 24" fill="none"><path d="M4 6.5h16v11H4z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 6.5L12 13 2 6.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- small highlights -->
+        <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap" class="reveal">
+          <div class="card" style="display:inline-flex;align-items:center;gap:12px">
+            <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(180deg,var(--accent),#007ab0);display:grid;place-items:center;font-weight:700;color:#021018">★</div>
+            <div>
+              <div style="font-weight:800">3+ Projects</div>
+              <small style="color:var(--muted)">Web & AI experiments</small>
+            </div>
+          </div>
+          <div class="card" style="display:inline-flex;align-items:center;gap:12px">
+            <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(180deg,var(--accent-2),#daa520);display:grid;place-items:center;font-weight:700;color:#021018">⚡</div>
+            <div>
+              <div style="font-weight:800">Open to internships</div>
+              <small style="color:var(--muted)">Remote / On-site</small>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- ABOUT -->
+    <section id="about" class="reveal">
+      <div class="section-head">
+        <h3>About</h3>
+        <div style="color:var(--muted)">Last updated: Nov 18, 2025</div>
+      </div>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:12px">
+        <div style="flex:2;min-width:260px" class="card">
+          <h4>Who I am</h4>
+          <p style="color:var(--muted);margin-top:8px">I'm an IT student focused on full-stack web development, data structures, and algorithmic problem solving. I enjoy learning modern tooling and building projects that help people and organizations.</p>
+
+          <h4 style="margin-top:12px">Quick facts</h4>
+          <ul style="color:var(--muted);margin-top:8px">
+            <li>Languages: JavaScript, Python, C++</li>
+            <li>Frameworks: React, Node.js (Express)</li>
+            <li>Databases: PostgreSQL, MongoDB</li>
+            <li>Tools: Git, Docker, Linux</li>
+          </ul>
+
+        </div>
+
+        <div style="flex:1;min-width:260px" class="card">
+          <h4>Education</h4>
+          <p style="color:var(--muted);margin-top:8px">Bachelor of Information Technology — (In progress)</p>
+          <h4 style="margin-top:12px">Resume</h4>
+          <p style="color:var(--muted);margin-top:8px">Download a quick resume or copy contact details.</p>
+          <div style="display:flex;gap:8px;margin-top:10px">
+            <button id="downloadTxt" class="primary" style="padding:8px 10px;font-size:0.9rem">Download Resume</button>
+            <button id="copyEmail" class="secondary" style="padding:8px 10px;font-size:0.9rem">Copy Email</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="reveal">
+      <div class="section-head">
+        <h3>Projects</h3>
+        <div class="projects-controls">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="web">Web</button>
+          <button class="chip" data-filter="mobile">Mobile</button>
+          <button class="chip" data-filter="ml">ML</button>
+        </div>
+      </div>
+
+      <div class="card-grid" style="margin-top:14px">
+        <article class="card project-card" data-category="web">
+          <h4>Responsive Portfolio Site</h4>
+          <div class="project-meta">HTML • CSS • JS • Accessibility</div>
+          <p style="color:var(--muted)">A pascal responsive, animated portfolio.</p>
+          <div class="project-actions">
+            <a class="ghost" href="#" onclick="openDemo(event,'https://unza.com')">Live</a>
+            <a class="ghost" href="#" onclick="openDemo(event,'https://github.com')">Code</a>
+            <a class="ghost" href="#" onclick="openModal(event,'Portfolio','This project is a pascal portfolio web, one of my projects.')">Details</a>
+          </div>
+        </article>
+
+        <article class="card project-card" data-category="web">
+          <h4>Task Manager App</h4>
+          <div class="project-meta">React • Node • PostgreSQL</div>
+          <p style="color:var(--muted)">Full-stack task manager with authentication and role-based access control.</p>
+          <div class="project-actions">
+            <a class="ghost" href="#" onclick="openDemo(event,'#')">Live</a>
+            <a class="ghost" href="#" onclick="openDemo(event,'#')">Code</a>
+            <a class="ghost" href="#" onclick="openModal(event,'Task Manager','A full-stack task manager built for teams.')">Details</a>
+          </div>
+        </article>
+
+        <article class="card project-card" data-category="ml">
+          <h4>Weather Prediction (ML)</h4>
+          <div class="project-meta">Python • scikit-learn</div>
+          <p style="color:var(--muted)">A small ML pipeline that forecasts short-term weather patterns from historical features.</p>
+          <div class="project-actions">
+            <a class="ghost" href="#" onclick="openModal(event,'Weather ML','Model: RandomForest | Accuracy: 87%')">Details</a>
+          </div>
+        </article>
+
+        <article class="card project-card" data-category="mobile">
+          <h4>Notes Mobile App</h4>
+          <div class="project-meta">Flutter • Firebase</div>
+          <p style="color:var(--muted)">Note-taking app with offline support and cloud sync across devices.</p>
+          <div class="project-actions">
+            <a class="ghost" href="#" onclick="openModal(event,'Notes App','Cross-platform notes with sync.')">Details</a>
+          </div>
+        </article>
+
+        <article class="card project-card" data-category="web">
+          <h4>Weather Dashboard</h4>
+          <div class="project-meta">JS • API Integration</div>
+          <p style="color:var(--muted)">Interactive dashboard that consumes public weather APIs, with caching and client-side filtering.</p>
+          <div class="project-actions">
+            <a class="ghost" href="#" onclick="openModal(event,'Weather Dashboard','API integration + caching')">Details</a>
+          </div>
+        </article>
+
+        <article class="card project-card" data-category="ml">
+          <h4>Image Classifier</h4>
+          <div class="project-meta">Python • TensorFlow</div>
+          <p style="color:var(--muted)">Prototype CNN classifier for simple object recognition tasks.</p>
+          <div class="project-actions">
+            <a class="ghost" href="#" onclick="openModal(event,'Image Classifier','Convolutional Neural Network')">Details</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="reveal">
+      <div class="section-head">
+        <h3>Skills</h3>
+        <div style="color:var(--muted)">Tools & proficiency</div>
+      </div>
+
+      <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:12px">
+        <div style="flex:1;min-width:260px" class="card">
+          <h4>Technical Skills</h4>
+          <div style="margin-top:12px">
+            <div class="skill-row"><div class="skill-name">JavaScript</div><div class="skill-bar"><div class="skill-fill" data-fill="92"></div></div></div>
+            <div class="skill-row"><div class="skill-name">Python</div><div class="skill-bar"><div class="skill-fill" data-fill="86"></div></div></div>
+            <div class="skill-row"><div class="skill-name">C++</div><div class="skill-bar"><div class="skill-fill" data-fill="78"></div></div></div>
+            <div class="skill-row"><div class="skill-name">React</div><div class="skill-bar"><div class="skill-fill" data-fill="84"></div></div></div>
+            <div class="skill-row"><div class="skill-name">Databases</div><div class="skill-bar"><div class="skill-fill" data-fill="75"></div></div></div>
+          </div>
+        </div>
+
+        <div style="flex:1;min-width:260px" class="card">
+          <h4>Soft Skills</h4>
+          <ul style="color:var(--muted);margin-top:8px">
+            <li>Problem solving & algorithms</li>
+            <li>Team collaboration</li>
+            <li>Time & project management</li>
+            <li>Technical communication</li>
+          </ul>
+
+          <h4 style="margin-top:12px">Certificates</h4>
+          <div style="color:var(--muted);margin-top:8px">Foundational courses: Data Structures, Web Development, Machine Learning (work in progress)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOIN ME -->
+    <section id="join" class="reveal">
+      <div class="section-head">
+        <h3>Join Me</h3>
+        <div style="color:var(--muted)">Collaborate, intern, or join projects</div>
+      </div>
+
+      <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:12px">
+        <div style="flex:1;min-width:300px" class="card">
+          <h4>Project interest form</h4>
+          <form id="joinForm">
+            <div class="form-row">
+              <input type="text" id="joinName" placeholder="Your name" required>
+              <input type="email" id="joinEmail" placeholder="Email" required>
+            </div>
+            <input type="text" id="joinTitle" placeholder="Project / Role (e.g. Frontend dev)" required>
+            <textarea id="joinMessage" placeholder="Tell me about the collaboration..." required></textarea>
+            <div style="display:flex;gap:8px">
+              <button type="submit" class="primary">Send</button>
+              <button type="button" id="clearJoin" class="secondary">Clear</button>
+            </div>
+          </form>
+        </div>
+
+        <div style="flex:1;min-width:260px" class="card">
+          <h4>Why work with me?</h4>
+          <p style="color:var(--muted);margin-top:8px">I bring a structured approach to development and enjoy mentoring peers while shipping quality code. I value testing, documentation, and clean design.</p>
+          <div style="margin-top:12px">
+            <div style="display:flex;gap:8px;align-items:center"><div style="width:10px;height:10px;background:var(--accent);border-radius:3px"></div><small style="color:var(--muted)">Fast learner</small></div>
+            <div style="display:flex;gap:8px;align-items:center;margin-top:8px"><div style="width:10px;height:10px;background:var(--accent-2);border-radius:3px"></div><small style="color:var(--muted)">Reliable & communicative</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="reveal">
+      <div class="section-head">
+        <h3>Contact</h3>
+        <div style="color:var(--muted)">Get in touch</div>
+      </div>
+
+      <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:12px">
+        <div style="flex:1;min-width:300px" class="card">
+          <h4>Send a message</h4>
+          <form id="contactForm">
+            <input type="text" id="cname" placeholder="Name" required>
+            <input type="email" id="cemail" placeholder="Email" required>
+            <textarea id="cmessage" placeholder="Message" required></textarea>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button class="primary" type="submit">Send Message</button>
+              <button type="reset" class="secondary">Reset</button>
+            </div>
+            <div id="contactFeedback" style="color:var(--accent-2);margin-top:8px;display:none"></div>
+          </form>
+        </div>
+
+        <div style="flex:1;min-width:260px" class="card">
+          <h4>Other ways</h4>
+          <p style="color:var(--muted);margin-top:8px">Email: <strong>stevenpascal371@gmail.com</strong></p>
+          <p style="color:var(--muted)">LinkedIn • GitHub • Twitter • Available for internships</p>
+          <div style="margin-top:10px"><button id="backTop" class="ghost">Back to top</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="fade-in">
+      <div>© 2025 Pascal • IT major. — <small style="color:var(--muted)">All rights reserved</small></div>
+    </footer>
+
+    <!-- Back to top floating -->
+    <button id="toTop" class="top-btn" title="Back to top" aria-label="Back to top">↑</button>
+  </div>
+
+  <!-- Modal (project details) -->
+  <div id="modal" aria-hidden="true" style="position:fixed;inset:0;display:none;place-items:center;padding:28px;background:rgba(2,6,12,0.7);z-index:9999">
+    <div style="max-width:720px;width:100%;background:linear-gradient(180deg,#07111a,#09161d);padding:18px;border-radius:12px;position:relative;color:#e6eef6">
+      <button id="closeModal" style="position:absolute;right:12px;top:12px;background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:18px">✕</button>
+      <h3 id="modalTitle">Title</h3>
+      <p id="modalBody" style="color:var(--muted)">Details</p>
+      <div style="display:flex;gap:10px;margin-top:12px">
+        <a class="primary" href="#" id="modalDemoLink">Open demo</a>
+        <a class="secondary" href="#" id="modalCodeLink">View code</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* =========================
+       Utility & UI interactions
+       ========================= */
+
+    // Intersection observer: reveal elements with .reveal
+    (function(){
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting) e.target.classList.add('in');
+        });
+      }, {threshold: 0.12});
+      document.querySelectorAll('.reveal').forEach(n=>io.observe(n));
+    })();
+
+    // Skill bars animation on reveal
+    (function(){
+      const fills = document.querySelectorAll('.skill-fill');
+      const io = new IntersectionObserver((ents)=>{
+        ents.forEach(e=>{
+          if(e.isIntersecting){
+            const el = e.target;
+            const pct = el.getAttribute('data-fill') || 60;
+            el.style.width = pct + '%';
+            io.unobserve(el);
+          }
+        });
+      }, {threshold:0.3});
+      fills.forEach(f=>io.observe(f));
+    })();
+
+    // Project filter chips
+    (function(){
+      const chips = document.querySelectorAll('.chip');
+      const projects = document.querySelectorAll('.project-card');
+      chips.forEach(ch=>{
+        ch.addEventListener('click', ()=>{
+          chips.forEach(c=>c.classList.remove('active'));
+          ch.classList.add('active');
+          const filter = ch.dataset.filter;
+          projects.forEach(p=>{
+            if(filter==='all' || p.dataset.category === filter) {
+              p.style.display = '';
+              p.classList.remove('hidden');
+            } else {
+              p.style.display = 'none';
+            }
+          });
+        });
+      });
+    })();
+
+    // Modal functions
+    function openModal(e,title,body){
+      if(e) e.preventDefault();
+      const modal = document.getElementById('modal');
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalBody').textContent = body;
+      document.getElementById('modalDemoLink').href = '#';
+      document.getElementById('modalCodeLink').href = '#';
+      modal.style.display = 'grid';
+      modal.setAttribute('aria-hidden','false');
+    }
+    document.getElementById('closeModal').addEventListener('click', ()=>{
+      const modal = document.getElementById('modal');
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden','true');
+    });
+
+    // Open external demo (dummy)
+    function openDemo(e,url){
+      e.preventDefault();
+      window.open(url,'_blank');
+    }
+
+    // Join form handling
+    document.getElementById('joinForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('joinName').value.trim();
+      const email = document.getElementById('joinEmail').value.trim();
+      const title = document.getElementById('joinTitle').value.trim();
+      const message = document.getElementById('joinMessage').value.trim();
+      if(!name||!email||!message){ alert('Please complete all fields.'); return; }
+      // Simulate send
+      alert('Thanks, ' + name + '! Your message was received — I will get back to you at ' + email + '.');
+      this.reset();
+    });
+    document.getElementById('clearJoin').addEventListener('click', ()=>{
+      document.getElementById('joinForm').reset();
+    });
+
+    // Contact form
+    document.getElementById('contactForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('cname').value.trim();
+      const email = document.getElementById('cemail').value.trim();
+      const msg = document.getElementById('cmessage').value.trim();
+      if(!name || !email || !msg){ alert('Please fill all fields'); return; }
+      // Simulate sending: show inline feedback
+      const fb = document.getElementById('contactFeedback');
+      fb.style.display = 'block';
+      fb.textContent = 'Message sent — thank you! I will reply to ' + email + ' soon.';
+      this.reset();
+      setTimeout(()=>fb.style.display='none', 6000);
+    });
+
+    // Copy email button
+    document.getElementById('copyEmail').addEventListener('click', async ()=>{
+      try {
+        await navigator.clipboard.writeText('stevenpascal371@gmail.com');
+        alert('Email copied to clipboard');
+      } catch (err) {
+        alert('Unable to copy. Email: email@example.com');
+      }
+    });
+
+    // Download resume as TXT
+    document.getElementById('downloadTxt').addEventListener('click', ()=>{
+      const resume = [
+        'Pascal — IT Student',
+        'Email: stevenpascal371@gmail.com',
+        'Location: Lusaka, Zambia',
+        '',
+        'Education: Bachelor of Information Technology (in progress)',
+        '',
+        'Skills:',
+        '- JavaScript, Java, C++, Python',
+        '- React, Node.js, PostgreSQL, MongoDB',
+        '- Git, Docker, Linux',
+        '',
+        'Projects: Responsive Portfolio, Task Manager, Weather Dashboard, ML prototypes'
+      ].join('\\n');
+      const blob = new Blob([resume], {type:'text/plain'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'Pascal_Resume.txt';
+      document.body.appendChild(a); a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    // Download resume (more polished — constructs MD and downloads)
+    document.getElementById('downloadResume').addEventListener('click', ()=>{
+      const md = [
+        '# Pascal — IT Student',
+        '',
+        '**Email:** stevenpascal@gmail.com',
+        '**Location:** Lusaka, Zambia',
+        '',
+        '## Education',
+        '- Bachelor of Information Technology (in progress)',
+        '',
+        '## Skills',
+        '- JavaScript, Python, C++',
+        '- React, Node.js, PostgreSQL, MongoDB',
+        '- Git, Docker, Linux',
+        '',
+        '## Projects',
+        '- Responsive Portfolio',
+        '- Task Manager App',
+        '- Weather Dashboard',
+        '- ML prototypes'
+      ].join('\\n');
+      const blob = new Blob([md], {type:'text/markdown'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download='Pascal_Resume.md';
+      document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+
+    // Copy to top button
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll', ()=>{
+      if(window.scrollY > 400) toTop.classList.add('show'); else toTop.classList.remove('show');
+    });
+    toTop.addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
+    document.getElementById('backTop').addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+    // Mode toggle (light/dark) — simple switch to invert colors slightly
+    const modeToggle = document.getElementById('modeToggle');
+    modeToggle.addEventListener('click', ()=>{
+      const mode = modeToggle.getAttribute('data-mode') === 'light' ? 'dark' : 'light';
+      modeToggle.setAttribute('data-mode', mode);
+      document.documentElement.style.setProperty('--bg', mode === 'dark' ? '#0b0f16' : '#f6fbff');
+      document.documentElement.style.setProperty('--card', mode === 'dark' ? '#0f1720' : '#ffffff');
+      document.documentElement.style.setProperty('--muted', mode === 'dark' ? '#98a0a8' : '#334155');
+      document.documentElement.style.setProperty('--glass', mode === 'dark' ? 'rgba(255,255,255,0.04)' : 'rgba(2,6,12,0.03)');
+      document.documentElement.style.setProperty('--glass-2', mode === 'dark' ? 'rgba(255,255,255,0.02)' : 'rgba(2,6,12,0.02)');
+      // invert knob for visual
+    });
+
+    // Smooth reveal for header elements on load
+    window.addEventListener('load', ()=>{
+      document.querySelectorAll('.hero-left .reveal, .profile, .hero .reveal').forEach((n,i)=>{
+        setTimeout(()=>n.classList.add('in'), i*120);
+      });
+      document.querySelectorAll('.fade-in').forEach(n=>setTimeout(()=>n.classList.add('in'),800));
+    });
+
+    // Simple keyboard accessibility: Esc closes modal
+    document.addEventListener('keydown',(e)=>{ if(e.key === 'Escape'){ document.getElementById('modal').style.display='none'; } });
+
+    // Small precaution: handle link placeholders so they don't navigate
+    document.querySelectorAll('a[href="#"]').forEach(a=>a.addEventListener('click', e=>e.preventDefault()));
+
+    // Typing effect for role (subtle)
+    (function(){
+      const el = document.getElementById('heroTitle');
+      const full = 'Pascal — Software & Web Developer';
+      let i=0; el.textContent='';
+      function step(){
+        if(i <= full.length){ el.textContent = full.slice(0,i); i++; setTimeout(step, 24); }
+      }
+      setTimeout(step, 500);
+    })();
+
+    // Ensure focus outlines for keyboard users
+    (function(){
+      let usingMouse = false;
+      window.addEventListener('mousedown', ()=>usingMouse=true);
+      window.addEventListener('keydown', (e)=>{ if(e.key === 'Tab') usingMouse = false; document.documentElement.style.setProperty('--outline-display', usingMouse ? 'none' : 'auto'); });
+    })();
+
+    // Small UX: clicking project "Details" opens modal, already implemented above
+  </script>
+</body>
+</html>
+

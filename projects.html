@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects - Pascal IT Major</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <meta name="description" content="Projects of Pascal - IT portfolio with modals and filterable categories">
+</head>
+<body class="dark">
+
+    <div class="profile-top">
+        <img src="./proj images/pascalProfile.jpg" alt="Pascal Profile">
+      </div>
+
+<header>
+  <div class="container header-container">
+    <div class="logo">Pascal<span class="highlight">IT</span></div>
+    <nav>
+      <ul id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html" class="active">Projects</a></li>
+        <li><a href="join.html">Join Me</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger"><div></div><div></div><div></div></div>
+    </nav>
+    <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+  </div>
+</header>
+
+<!-- Projects Section -->
+<section class="projects-page">
+  <div class="container">
+    <h2>My Projects</h2>
+
+    <div class="project-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="web">Web</button>
+        <button class="filter-btn" data-filter="mobile">Mobile</button>
+        <button class="filter-btn" data-filter="design">Design</button>
+      </div>
+      
+      
+
+    <!-- Projects Grid -->
+    <div class="project-grid">
+      <div class="project-card" data-category="web" onclick="openModal('Portfolio Website','Responsive web portfolio using HTML, CSS, JS.')">
+        <img src="https://via.placeholder.com/300x200" alt="Portfolio Website">
+        <h3>Portfolio Website</h3>
+      </div>
+      <div class="project-card" data-category="react" onclick="openModal('Task Manager App','Full-stack React & Node.js project.')">
+        <img src="https://via.placeholder.com/300x200" alt="Task Manager">
+        <h3>Task Manager App</h3>
+      </div>
+      <div class="project-card" data-category="python" onclick="openModal('Data Analysis Tool','Python project with Pandas & Matplotlib.')">
+        <img src="https://via.placeholder.com/300x200" alt="Data Analysis">
+        <h3>Data Analysis Tool</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+<div id="projectModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h3 id="modalTitle"></h3>
+    <p id="modalDesc"></p>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2025 Pascal IT Major. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+function filterProjects(cat){
+  const projects = document.querySelectorAll('.project-card');
+  document.querySelectorAll('.filter-btns button').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+  projects.forEach(p => { p.style.display = (cat==='all' || p.dataset.category===cat) ? 'block' : 'none'; });
+}
+</script>
+
+</body>
+</html>

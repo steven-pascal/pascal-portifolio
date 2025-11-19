@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Me - Pascal IT Major</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <meta name="description" content="Join Me - contact form for collaboration and internships">
+</head>
+<body class="dark">
+
+
+    <div class="profile-top">
+        <img src="./proj images/pascalProfile.jpg" alt="Pascal Profile">
+      </div>
+
+<header>
+  <div class="container header-container">
+    <div class="logo">Pascal<span class="highlight">IT</span></div>
+    <nav>
+      <ul id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="join.html" class="active">Join Me</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger"><div></div><div></div><div></div></div>
+    </nav>
+    <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+  </div>
+</header>
+
+<section class="join-page">
+  <div class="container">
+    <h2>Join Me</h2>
+    <p>Collaborate on projects or internships. Fill the form below:</p>
+    <form id="joinForm">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Message" required></textarea>
+      <button type="submit" class="btn">Send</button>
+    </form>
+    <p id="form-msg"></p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2025 Pascal IT Major. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+// Form validation placeholder
+document.getElementById('joinForm').addEventListener('submit', e=>{
+  e.preventDefault();
+  document.getElementById('form-msg').textContent = "Form submitted successfully! (placeholder)";
+});
+</script>
+
+</body>
+</html>
